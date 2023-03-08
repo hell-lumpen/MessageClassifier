@@ -52,4 +52,4 @@ class MessagePreprocessor:
             mystem = Mystem()
             msg = mystem.lemmatize(msg)
 
-        return "".join(msg)
+        return "".join(msg)[:-2]
