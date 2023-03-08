@@ -1,5 +1,7 @@
 classifier_settings:
   test_size: 0.3
+
+preprocessor_settings:
   row_data_file: 'data/source.csv'
   prep_data_file: 'data/preprocessed.csv'
   stopwords: ['добрый', 'день', 'пожа', 'любить', 'пожалуйста', 'также', 'a', 'здравствовать', 'ли', 'Здравствуйте',

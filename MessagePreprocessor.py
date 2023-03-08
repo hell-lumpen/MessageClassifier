@@ -12,8 +12,8 @@ from settings import CONFIG
 
 class MessagePreprocessor:
     __stopwords = [w for w in stopwords.words('russian')
-                   if w not in CONFIG['classifier_settings']['exclusionary_stopwords']] \
-                  + CONFIG['classifier_settings']['stopwords']
+                   if w not in CONFIG['preprocessor_settings']['exclusionary_stopwords']] \
+                  + CONFIG['preprocessor_settings']['stopwords']
 
     def __init__(self, filename: str, feature_column_name='text', label_column_name='tag'):
         self.filename = filename
@@ -29,7 +29,7 @@ class MessagePreprocessor:
                                                          remove_stopwords=remove_stopwords) for text in
                                      tqdm(self.data['text'])]
 
-        self.data.to_csv(CONFIG['classifier_settings']['prep_data_file'], header=True)
+        self.data.to_csv(CONFIG['preprocessor_settings']['prep_data_file'], header=True)
 
     @staticmethod
     def preprocess_msg(msg: str, remove_punc=True, remove_numbers=True, lemmatize=True,
