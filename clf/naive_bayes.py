@@ -11,3 +11,6 @@ class NaiveBayes(AbstractNeuralNetwork):
         self.model = Pipeline([('vect', CountVectorizer()),
                                ('tfidf', TfidfTransformer()),
                                ('clf', MultinomialNB())])
+
+    def get_model_name(self) -> str:
+        return 'MultinomialNB'

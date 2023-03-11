@@ -11,3 +11,6 @@ class MyNearestNeighbors(AbstractNeuralNetwork):
         self.model = Pipeline([('vect', CountVectorizer()),
                                ('tfidf', TfidfTransformer()),
                                ('clf', NearestCentroid())])
+
+    def get_model_name(self) -> str:
+        return 'NearestCentroid'

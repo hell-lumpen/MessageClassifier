@@ -1,5 +1,6 @@
 classifier_settings:
   test_size: 0.3
+  random_state: 42
 
 preprocessor_settings:
   row_data_file: 'data/source.csv'

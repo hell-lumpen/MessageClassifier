@@ -16,3 +16,6 @@ class LogRegression(AbstractNeuralNetwork):
                                                           solver='saga',
                                                           multi_class='multinomial'
                                                           ))])
+
+    def get_model_name(self) -> str:
+        return 'LogisticRegression'

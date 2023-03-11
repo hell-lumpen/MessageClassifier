@@ -23,3 +23,6 @@ class CalibratedClassifier(AbstractNeuralNetwork):
                                        cv=5
                                    ))
                                ])
+
+    def get_model_name(self) -> str:
+        return 'CalibratedClassifierCV'

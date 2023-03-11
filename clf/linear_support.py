@@ -12,3 +12,6 @@ class LinSupport(AbstractNeuralNetwork):
                                ('tfidf', TfidfTransformer()),
                                ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3,
                                                      random_state=42,max_iter=5, tol=None))])
+
+    def get_model_name(self) -> str:
+        return 'SGDClassifier'

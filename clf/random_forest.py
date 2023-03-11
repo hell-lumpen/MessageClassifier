@@ -11,3 +11,6 @@ class RandomForest(AbstractNeuralNetwork):
         self.model = Pipeline([('vect', CountVectorizer()),
                                ('tfidf', TfidfTransformer()),
                                ('clf', ExtraTreesClassifier(max_depth=60, random_state=0))])
+
+    def get_model_name(self) -> str:
+        return 'ExtraTreesClassifier'
