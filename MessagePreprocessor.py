@@ -36,7 +36,7 @@ class MessagePreprocessor:
                        remove_stopwords=True) -> str:
         msg = re.sub(r'\s+', ' ', msg, flags=re.I).lower()
         if remove_punc:
-            msg = "".join([ch if ch not in string.punctuation else ' ' for ch in msg])
+            msg = "".join([ch if ch not in string.punctuation + '«»' else ' ' for ch in msg])
 
         if remove_numbers:
             msg = ''.join([i if not i.isdigit() else ' ' for i in msg])
@@ -52,4 +52,9 @@ class MessagePreprocessor:
             mystem = Mystem()
             msg = mystem.lemmatize(msg)
 
-        return "".join(msg)[:-2]
+        filtered_tokens = []
+        if remove_stopwords:
+            for token in msg:
+                if token not in MessagePreprocessor.__stopwords:
+                    filtered_tokens.append(token)
+        return " ".join(filtered_tokens)[:-2]

@@ -1,17 +1,21 @@
+import nltk
+import numpy as np
 import pandas
 
-from clf import *
+from MessagePreprocessor import MessagePreprocessor
+from clf import RandomForest, LogRegression, CalibratedClassifier, get_test_data, NaiveBayes
 from settings import CONFIG
+from stats import Stats
 
 
 def main():
-    # msg_processor = MessagePreprocessor(CONFIG['preprocessor_settings']['row_data_file'])
+    msg_processor = MessagePreprocessor(CONFIG['preprocessor_settings']['row_data_file'])
     # msg_processor.preprocess()
     dataset = pandas.DataFrame(pandas.read_csv(CONFIG['preprocessor_settings']['prep_data_file'],
                                                usecols=['text', 'preprocessed', 'tag'],
                                                encoding='utf8'))
 
-
+    dataset = dataset[dataset['preprocessed'].notna()]
     models = [RandomForest(), LogRegression(), CalibratedClassifier()]
     for model in models:
         model.fit(dataset, 'preprocessed')
@@ -21,6 +25,7 @@ def main():
     for model in models:
         predicted_labels.append(model.predict(test_features))
         predicted_proba = model.predict_proba(test_features)
+        print(model.get_report())
         wrong_answers = 0
         wrong_answers_2 = 0
 
@@ -58,22 +63,12 @@ def main():
                              key=lambda item: item[1]))
 
     for key, value in error_stat.items():
-
-        # x.append(key)
-        # y.append((value / total_errors) - (dataset["tag"].tolist().count(key) / len(dataset["tag"])))
         print(f'label= {key:30} error_count={value:3} | % in errors={value / total_errors:>.6f} | % in all messages={value / len(test_features):>.6f}')
-    #  % in test={dataset["tag"].tolist().count(key) / len(dataset["tag"]):>.6f} |
-    # fig, ax = plt.subplots(figsize=(20, 16))
-    # ax.plot(x, y, marker='o')
-    #
-    # ax.set_xlabel('categories')
-    # ax.set_ylabel('probability difference in the test and training samples')
-    #
-    # ax.axhline(y=0, color='r', linestyle='-')
-    # ax.tick_params(axis='x', rotation=70)
-    #
-    # plt.savefig('data/probability_difference.png')
-    # plt.show()
+
+    stat: pandas.Series  = Stats.get_all_stat(dataset['preprocessed'])
+    print(stat)
+    print(stat.shape[0])
+    print(stat.sum())
 
 if __name__ == "__main__":
     main()
