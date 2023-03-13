@@ -16,6 +16,7 @@ def main():
                                                encoding='utf8'))
 
     dataset = dataset[dataset['preprocessed'].notna()]
+    Stats.get_word_cloud_plot(dataset, 'text')
     models = [RandomForest(), LogRegression(), CalibratedClassifier()]
     for model in models:
         model.fit(dataset, 'preprocessed')
