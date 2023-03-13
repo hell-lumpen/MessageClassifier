@@ -3,7 +3,7 @@ classifier_settings:
   random_state: 101
 
 preprocessor_settings:
-  row_data_file: 'data/source.csv'
+  raw_data_file: 'data/source.csv'
   prep_data_file: 'data/preprocessed.csv'
   stopwords: ['добрый', 'день', 'пожа', 'любить', 'пожалуйста', 'также', 'a', 'здравствовать', 'ли', 'Здравствуйте',
               'здравствуйте', 'МАИ', 'маи', 'подсказывать', 'уточнять', 'хотеть', 'узнавать', 'таки', 'вечер',

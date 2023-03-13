@@ -61,7 +61,7 @@ class Stats:
                            key=lambda item: item[1])))
 
     @staticmethod
-    def get_stat_by_tag(data: pandas.Series, tags=None | list):
+    def get_stat_by_tag(data: pandas.Series, tags=None):
         pass
 
     @staticmethod

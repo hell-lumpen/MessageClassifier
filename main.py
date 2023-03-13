@@ -9,7 +9,7 @@ from stats import Stats
 
 
 def main():
-    msg_processor = MessagePreprocessor(CONFIG['preprocessor_settings']['row_data_file'])
+    msg_processor = MessagePreprocessor(CONFIG['preprocessor_settings']['raw_data_file'])
     # msg_processor.preprocess()
     dataset = pandas.DataFrame(pandas.read_csv(CONFIG['preprocessor_settings']['prep_data_file'],
                                                usecols=['text', 'preprocessed', 'tag'],
